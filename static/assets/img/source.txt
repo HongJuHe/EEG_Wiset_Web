@@ -1,0 +1,12 @@
+bg-eeg
+https://pixabay.com/images/id-2462430/
+bg-polygon
+https://pixabay.com/images/id-3230205/
+
+icon-brain
+icon-chat
+icon-data
+icon-mental
+icon-result
+
+https://www.iconfinder.com/
