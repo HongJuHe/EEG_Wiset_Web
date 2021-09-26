@@ -24,9 +24,9 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"><a href="/">Project JaeJu</a></li>
                 <li class="sidebar-nav-item"><a href="/">메인 화면</a></li>
-                <li class="sidebar-nav-item"><a href="/upload">뇌파 전송</a></li>
+                <li class="sidebar-nav-item"><a href="/send_file">뇌파 전송</a></li>
                 <li class="sidebar-nav-item"><a href="/map">병원 찾기</a></li>
-                <li class="sidebar-nav-item"><a href="#">기록 확인</a></li>
+                <li class="sidebar-nav-item"><a href="#page-top">기록 확인</a></li>
             </ul>
         </nav>
         <!-- Header-->
@@ -52,58 +52,24 @@
         <section class="content-section bg-primary text-white text-center" id="services">
             <div class="container px-4 px-lg-5">
                 <div class="content-section-heading">
-                    <h3 class="text-secondary mb-0">지금까지 측정한 뇌파 데이터를 기반으로 한 우울증 통계</h3>
-                    <h2 class="mb-5">우울증 판단 통계를 확인하세요!</h2>
+                    <h3 class="text-secondary mb-0" style="font-size: 30px;">뇌파 데이터를 기반으로 한 정신 증상</h3>
+                    <h2 class="mb-5" style="font-size: 40px;">우울증 판단 통계를 확인하세요!</h2>
                 </div>
-                <div class="row gx-4 gx-lg-5">
-                    <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                        <span class="service-icon rounded-circle mx-auto mb-3">
-                            <div class="center"><img src="../static/assets/img/icon-data.png" width="50" height="50"></div>
-                        </span>
-                        <h4><strong>뇌파 데이터 전송</strong></h4>
-                        <p class="text-faded mb-0">지금까지 총 7번
-                            <br>뇌파 데이터를 전송했습니다.</p>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-                        <span class="service-icon rounded-circle mx-auto mb-3">
-                            <div class="center"><img src="../static/assets/img/icon-result.png" width="50" height="50"></div>
-                        </span>
-                        <h4><strong>우울증 판단 결과</strong></h4>
-                        <p class="text-faded mb-0">지금까지 총 2번
-                            <br>우울증이라고 판단되었습니다.</p>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
-                        <span class="service-icon rounded-circle mx-auto mb-3">
-                            <div class="center"><img src="../static/assets/img/icon-chat.png" width="50" height="50"></div>
-                        </span>
-                        <h4><strong>챗봇 대화 정신 증상</strong></h4>
-                        <p class="text-faded mb-0">챗봇과 대화한 내용 중
-                            <br>32%가 우울하다고 판단되었습니다.</p>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <span class="service-icon rounded-circle mx-auto mb-3">
-                            <div class="center"><img src="../static/assets/img/icon-mental.png" width="50" height="50"></div>
-                        </span>
-                        <h4><strong>챗봇 대화 세부 증상</strong></h4>
-                        <p class="text-faded mb-0">우울하다고 판단된 내용 중
-                            <br>50%가 불면증이 있다고 판단했습니다.</p>
-                    </div>
+                <div class="content-section-heading">
+                    <canvas id="graph1" style="background-color: white; padding: 10px;"></canvas>
+                    <br>
+                    <canvas id="graph2" style="background-color: white; padding: 10px;"></canvas>
                 </div>
             </div>
         </section>
-        
+        <!-- JS for show records -->
+		<script src="../static/js/records.js"></script>
         <!-- Footer-->
         <footer class="footer text-center">
             <div class="container px-4 px-lg-5">
                 <ul class="list-inline mb-5">
                     <li class="list-inline-item">
-                        <a class="social-link rounded-circle text-white mr-3" href="#!"><i class="icon-social-facebook"></i></a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="social-link rounded-circle text-white mr-3" href="#!"><i class="icon-social-twitter"></i></a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="social-link rounded-circle text-white" href="#!"><i class="icon-social-github"></i></a>
+                        <a class="social-link rounded-circle text-white" href="https://github.com/KimJaea/JaeJu-GetEEG" target="_blank"><i class="icon-social-github"></i></a>
                     </li>
                 </ul>
                 <p class="text-muted small mb-0">Copyright &copy; Project JaeJu 2021</p>
@@ -118,5 +84,7 @@
         <!-- Google model viewer-->
         <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"></script>
         <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+        <!-- Char Source -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     </body>
 </html>

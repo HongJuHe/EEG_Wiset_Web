@@ -23,7 +23,7 @@ def map():
 
 
 # records page
-@app.route('/statistics')
+@app.route('/records')
 def record():
     send_data = []
     # get depression_result
@@ -59,11 +59,11 @@ def record():
 
     send_data.append(depression_data)
     send_data.append(intent)
-    return render_template('records.html')
+    return render_template('records.html', value=send_data)
 
 
 # upload html rendering
-@app.route('/upload')
+@app.route('/send_file')
 def render_file():
     return render_template('send_file.html')
 

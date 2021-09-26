@@ -15,7 +15,7 @@ var geo_options = {
     timeout           : 27000
 };
 
-window.onload = getLocation; 
+window.onload = getLocation;
 function getLocation(){
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(locationSuccess, locationError, geo_options);
@@ -39,7 +39,6 @@ function locationError(error){
 }
 
 function initialize() {
-    console.log("hi~!!!!");
     directionsDisplay = new google.maps.DirectionsRenderer();
     directionsService = new google.maps.DirectionsService();
 
@@ -50,15 +49,15 @@ function initialize() {
     };
 
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    
+
     const geocoder = new google.maps.Geocoder();
     const infowindow = new google.maps.InfoWindow();
     geocodeLatLng(geocoder, map, infowindow);
-    
-    service = new google.maps.places.PlacesService(map);    
+
+    service = new google.maps.places.PlacesService(map);
     directionsDisplay.setMap(map); // show map after load everything
 }
-   
+
 function geocodeLatLng(geocoder, map, infowindow) {
     const latlng = {
         lat: latitude,
@@ -73,7 +72,7 @@ function geocodeLatLng(geocoder, map, infowindow) {
                 position: latlng,
                 map: map,
             });
-    
+
             infowindow.setContent("현재 위치: " + response.results[0].formatted_address);
             infowindow.open(map, marker);
 
@@ -84,7 +83,7 @@ function geocodeLatLng(geocoder, map, infowindow) {
         }
     }) .catch((e) => console.log("Geocoder failed due to: " + e));
 
-} 
+}
 
 function setStatement(sentence) {
     const mapInfo = document.getElementById("map-info");
@@ -105,20 +104,20 @@ function getStatement() {
 
     for (const key in Object.keys(data)) {
         const Gu = Object.keys(data)[key];
-        
+
         if(Gu == locationGu) {
             const names = Object.values(data[Gu])[0];
             const scores = Object.values(data[Gu])[1];
             const links = Object.values(data[Gu])[2];
             const addresses = Object.values(data[Gu])[3];
-            
+
             var maxLength = names.length;
 
             var order = Object.keys(scores);
             for(var i = 0; i < maxLength - 1; i++) {
                 for(var j = i+1; j < maxLength; j++) {
                     if(scores[i] < scores[j]) {
-                        var tmp;    
+                        var tmp;
                         tmp = scores[i];
                         scores[i] = scores[j];
                         scores[j] = tmp;
@@ -134,11 +133,11 @@ function getStatement() {
                 var j = order[i];
                 description += makeInformation(names[j], scores[i], links[j], addresses[j]);
             }
-            
+
             listInfo.innerHTML = description;
-        }       
+        }
     }
-    
+
 }
 
 function makeInformation(name, score, link, address) {
@@ -169,7 +168,7 @@ function makeInformation(name, score, link, address) {
     if(link == "없습니다") {
         string += '<a class="btn btn-xl btn-light me-4" href="#!">';
         string += '병원 홈페이지 준비중</a>';
-    } else {        
+    } else {
         string += '<a class="btn btn-dark btn-xl" href="';
         string += link + '" target="_blank">병원 홈페이지 바로가기</a>';
     }
@@ -201,7 +200,7 @@ function geocodeAddress(name, address) {
                     anchor: marker,
                     shouldFocus: true,
                 });
-            }); 
+            });
         } else {
             alert('Geocode Failed: ' + status);
         }
