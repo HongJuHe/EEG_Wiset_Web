@@ -1,7 +1,9 @@
 window.onload = function() {
     var dp = {{ value|tojson }};
+    console.log(dp)
     //var dp = ['0', '0.9130']
 
+    dp = dp[0]
     const element = document.getElementById('ann');
     if(dp[0] == '0') {
         var per = parseFloat(dp[1]) * 100;

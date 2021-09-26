@@ -40,13 +40,27 @@
             </div>
         </section>
         <!-- JS for show EEG result -->
-		<script src="../static/js/result.js"></script>
+		<script>
+            window.onload = function() {
+            var dp = {{ value|tojson }};
+            console.log(dp)
+
+            const element = document.getElementById('ann');
+            if(dp[0] == '0') {
+                var per = parseFloat(dp[1]) * 100;
+                element.innerHTML += String(per) + "%의 확률로 우울증이 아닙니다.";
+            } else {
+                var per = parseFloat(dp[1]) * 100;
+                element.innerHTML += String(per) + "%의 확률로 우울증입니다.";
+            }
+        }
+        </script>
         <!-- Footer-->
         <footer class="footer text-center">
             <div class="container px-4 px-lg-5">
                 <ul class="list-inline mb-5">
                     <li class="list-inline-item">
-                        <a class="social-link rounded-circle text-white" href="https://github.com/KimJaea/JaeJu-GetEEG" target="_blank"><i class="icon-social-github"></i></a>
+                        <a class="social-link rounded-circle text-white" href="https://github.com/HongJuHe/EEG_Wiset_Web" target="_blank"><i class="icon-social-github"></i></a>
                     </li>
                 </ul>
                 <p class="text-muted small mb-0">Copyright &copy; Project JaeJu 2021</p>

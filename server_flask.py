@@ -32,11 +32,14 @@ def record():
     with open('./static/data/depression_result.json', 'r') as f:
         temp_data = json.load(f)
 
-    for d in temp_data:
+    temp_d = temp_data['depression']
+
+    for d in temp_d:
         d_data = []
-        d_data.append(d)
-        d_data.append(temp_data[d]['result'])
-        d_data.append(temp_data[d]['percent'])
+        d_data.append(d['date'])
+        d_data.append(d['result'])
+        #d_data.append(temp_data[d]['result'])
+        d_data.append(d['percent'])
         depression_data.append(d_data)
 
     print(depression_data)
@@ -44,21 +47,26 @@ def record():
     # get intent
     intent = []
     dynamodb = boto3.resource('dynamodb', region_name='ap-northeast-2')
-    table = dynamodb.Table('user_database')
+    table = dynamodb.Table('user_db2')
     response = table.scan()
     items = response['Items']
     for item in items:
         temp_intent = []
-        for n in item['events'][3]['parse_data']['intent_ranking']:
-            if n['confidence'] > 0.8:
-                temp_intent.append(n['name'])
+        for e in item['events']:
+            if "input_channel" in e:
+                if e['input_channel'] == 'socketio':
+                    print(e['parse_data']['intent_ranking'])
+                    n = e['parse_data']['intent_ranking'][0]
+                    if n['confidence'] > 0.8:
+                        temp_intent.append(n['name'])
+
         if (len(temp_intent) != 0):
             intent.append(temp_intent)
 
-    print(intent)
-
     send_data.append(depression_data)
     send_data.append(intent)
+    print(send_data)
+
     return render_template('records.html', value=send_data)
 
 
@@ -101,8 +109,32 @@ def upload_file():
         print(np.shape(data_arr))
         model = load_model('eeg_deeplearning_conv1d_lstm.h5')
         result = model.predict(data_arr)
+        result = result.tolist()
+        print("result:", result)
+        result = result[0]
+        send_result = []
+        if result[0] > 0.4:
+            send_result.append(0)
+            send_result.append(result[0])
+        else:
+            send_result.append(1)
+            send_result.append(result[1])
 
-        return render_template('send_result.html', value=result)
+        temp_data = {}
+        with open('./static/data/depression_result.json', 'r') as f:
+            temp_data = json.load(f)
+
+        temp_date = str(x.year) + "_" + str(x.month) + "_" + str(x.day)
+        temp_data["depression"].append({
+            "date": temp_date,
+            "result": send_result[0],
+            "percent": send_result[1]
+        })
+
+        with open('./static/data/depression_result.json', 'w') as f:
+            json.dump(temp_data, f)
+
+        return render_template('send_result.html', value=send_result)
 
 
 if __name__ == '__main__':

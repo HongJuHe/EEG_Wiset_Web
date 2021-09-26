@@ -7,16 +7,6 @@
 window.onload = function() {
     // Get Record Data
     var data = {{ value|tojson }};
-    /*var data = [[['2021_8_08', 1, 0.9164004780000438],
-    ['2021_9_08', 1, 0.9164004780000438],
-    ['2021_9_18', 0, 0.9164004780273438],
-    ['2021_9_19', 0, 0.9159774780273438]],
-    [['depression_insomnia', 'depression_insomnia', 'depression_dazed'],
-    ['sadness_miserable', 'depression_insomnia', 'sadness_miserable'],
-    ['depression_gloomy', 'depression_confidence', 'depression_dazed', 'depression_concentration'],
-    ['depression_lethargy', 'depression_lethargy', 'sadness_upset', 'sadness_upset'],
-    ['angry_resentment', 'angry_resentment', 'lonely_meaningless', 'sadness_regret']]]*/
-
     var data_eeg = data[0];
     var data_chat = data[1];
 
